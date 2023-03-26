@@ -99,15 +99,21 @@ stages:
     - task: CmdLine@2
       displayName: Install Newman
       inputs:
-        script:           # ToDo: Write your commands to install newman
+        script: 'npm install -g newman'
         workingDirectory: $(System.DefaultWorkingDirectory)
+    - task: CmdLine@2
+      displayName: Install Newman Reporter JUnit
+      inputs:
+        script: 'npm install -g newman-reporter-junitfullreport'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+
     # Postman Data Validation Test Suite    
     # ToDo: Verify the working directory and the newman scripts
     - task: CmdLine@2
       displayName: Run Data Validation Tests
       continueOnError: true
       inputs:
-        script:           # ToDo: Write your commands
+        script: 'newman run StarterAPIsDataValidation.postman_collection.json -e StarterAPIsEnvironment.postman_environment.json'          # ToDo: Write your commands
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
     # ToDo: Update the command and verify the working directory
@@ -115,7 +121,7 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script:           # ToDo: Write your commands
+        script: 'newman run StarterAPIsRegression.postman_collection.json -e StarterAPIsEnvironment.postman_environment.json'          # ToDo: Write your commands
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
@@ -123,9 +129,9 @@ stages:
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: '**/TEST-*.xml'
-        searchFolder:       # ToDo
+        searchFolder: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
         mergeTestResults: true
-        testRunTitle:       # ToDo
+        testRunTitle: 'Postman Testing Report'
 
     #--------------------------------------------#
     # Selenium (UI) Test Suite - Archive the package  
