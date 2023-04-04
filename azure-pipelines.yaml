@@ -94,6 +94,10 @@ stages:
     #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
 #--------------------------------------------#    
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
     # Postman - Install Newman    
     # ToDo: Update the command and verify the working directory
     - task: CmdLine@2
@@ -113,7 +117,7 @@ stages:
       displayName: Run Data Validation Tests
       continueOnError: true
       inputs:
-        script: 'newman run StarterAPIsDataValidation.postman_collection.json -e StarterAPIsEnvironment.postman_environment.json'          # ToDo: Write your commands
+        script: 'newman run TestSuite.Data-Validation.json -e Test.enviroment.json'          # ToDo: Write your commands
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman Regression Test Suite    
     # ToDo: Update the command and verify the working directory
@@ -121,7 +125,7 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: 'newman run StarterAPIsRegression.postman_collection.json -e StarterAPIsEnvironment.postman_environment.json'          # ToDo: Write your commands
+        script: 'newman run TestSuite.Regression.json -e Test.enviroment.json'          # ToDo: Write your commands
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     # Postman - Publish Results 
     # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
