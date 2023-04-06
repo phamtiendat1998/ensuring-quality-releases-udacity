@@ -18,6 +18,8 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
   environmentName: 'test'
+  # Subscription
+  subscription: ''
 
 stages:
 #--------------------------------------------#  
@@ -158,14 +160,14 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
-        rootFolderOrFile: 
-        includeRootFolder:
-        archiveType: 
-        archiveFile: 
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/fakerestapi'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fake-rest-api.zip'
     # FakeRestAPI - Publish    
-    - publish: 
-      displayName: 
-      artifact: 
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fake-rest-api.zip'
+      displayName: 'Upload FakeRestAPI Package'
+      artifact: fake-rest-api
 
     #--------------------------------------------#  
     # JMeter (Performance) Test Suite - Archive
@@ -173,14 +175,14 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive PerformanceTestSuite'
       inputs:
-        rootFolderOrFile: 
-        includeRootFolder:
-        archiveType: 
-        archiveFile: 
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter/test-suite'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmentertest.zip'
     # JMeter Test Suite - Publish    
-    - publish: 
-      displayName: 
-      artifact: 
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmentertest.zip'
+      displayName:  'Upload JMeter Package'
+      artifact: jmeter-tests
 
 #--------------------------------------------#  
 # DEPLOYMENT STAGE
@@ -201,10 +203,10 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription:      # ToDo
-              appName:                # ToDo
+              azureSubscription: '$(subscription)'     # ToDo
+              appName: 'fake-api-app'               # ToDo
               appType: webApp
-              package: $(Pipeline.Workspace)/<artifact>/<archiveFile>       # ToDo: Use the published zip artifact. 
+              package: '$(Pipeline.Workspace)/fake-rest-api/$(Build.BuildId)-fake-rest-api.zip'     # ToDo: Use the published zip artifact. 
           #--------------------------------------------#    
           # Run JMeter test suite against the App Service
           # ToDo: Update the script below to install jmeter, unzip the jmeter test suite published zip artifact, and run the PerformanceTestSuite.  
