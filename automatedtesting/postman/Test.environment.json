@@ -1,0 +1,27 @@
+{
+	"id": "bc38ea10-0da4-469e-8318-b45948be2ecf",
+	"name": "Starter APIs Environment",
+	"values": [
+		{
+			"key": "name",
+			"value": "Udacity",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "salary",
+			"value": "12000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "age",
+			"value": "12",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-03-26T10:45:13.778Z",
+	"_postman_exported_using": "Postman/10.11.1"
+}
