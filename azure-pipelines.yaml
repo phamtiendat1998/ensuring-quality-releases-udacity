@@ -16,8 +16,6 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
   environmentName: 'test-vm'
-  # Subscription
-  subscription: ''
 
 stages:
 #--------------------------------------------#  
@@ -193,7 +191,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: '$(subscription)'
+              azureSubscription: '$(azureServiceConnectionId)'
               appName: 'fake-api-app'              
               appType: webApp
               package: '$(Pipeline.Workspace)/fake-rest-api/$(Build.BuildId)-fake-rest-api.zip'
