@@ -74,7 +74,7 @@ stages:
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
-        command: 'apply'
+        command:  apply -var-file=terraform.tfvars'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
