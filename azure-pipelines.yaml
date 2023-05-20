@@ -15,7 +15,7 @@ variables:
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
-  environmentName: 'test'
+  environmentName: 'test-vm'
   # Subscription
   subscription: ''
 
@@ -218,7 +218,7 @@ stages:
     environment:
       name: '$(environmentName)'
       resourceType: VirtualMachine
-      tags: selenium
+      # tags: selenium
     strategy:
       runOnce:
         deploy:
