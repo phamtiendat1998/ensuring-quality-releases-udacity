@@ -34,7 +34,7 @@ stages:
         terraformVersion: '1.2.9'
     
     # Run Terraform Init on the pipeline agent 
-    - task: TerraformTaskV3@3
+    - task: TerraformCLI
       displayName: 'Terrafom init'
       inputs:
         provider: 'azurerm'
@@ -46,7 +46,7 @@ stages:
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
-    - task: TerraformTaskV3@3
+    - task: TerraformCLI
       displayName: Terraform validate
       inputs:
         provider: 'azurerm'
@@ -70,7 +70,7 @@ stages:
 
     
     # Run Terraform Apply
-    - task: TerraformTaskV3@3
+    - task: TerraformCLI
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
@@ -81,7 +81,7 @@ stages:
 
     # ToDo: Change the workingDirectory path, as applicable to you
     # Destroy the resources in Azure by running a separate pipeline. 
-    # - task: TerraformTaskV3@3
+    # - task: TerraformCLI
     #   displayName: Terraform destroy
     #   inputs:
     #     provider: 'azurerm'
