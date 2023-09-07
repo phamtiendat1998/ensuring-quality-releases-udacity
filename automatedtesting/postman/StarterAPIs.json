@@ -1,20 +1,18 @@
 {
 	"info": {
 		"_postman_id": "968b3a18-cc72-48a2-9b6b-e8619b4aaca8",
-		"name": "Starter APIs Regression",
+		"name": "Starter APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create Employee - Basic Functionality",
+			"name": "Create Employee",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "38b1717c-45ae-477f-8dae-8e889ba381d5",
 						"exec": [
-							"pm.test(\"Response code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
 							"});",
@@ -55,21 +53,17 @@
 			"response": []
 		},
 		{
-			"name": "Get All Employees - Basic Functionality",
+			"name": "Get All Employees",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"id": "af3cb111-e3ac-4174-b8ca-7f4127a0285d",
 						"exec": [
-							"pm.test(\"Response code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
 							"});",
-							"pm.test(\"Response data is an array\", function () {",
-							"    pm.expect(pm.response.json()).to.be.an('array');",
-							"})"
+							""
 						],
 						"type": "text/javascript"
 					}

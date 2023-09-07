@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "720ab82c-ea56-4fa4-8568-a94268476343",
+		"name": "datavalidation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check data\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json.name).to.eq(pm.environment.get(\"name\"));",
+							"    pm.expect(json.job).to.eq(pm.environment.get(\"job\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"job\": \"{{job}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/create",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check data\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json.data.id).to.eq(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/users/2",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check data\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json.name).to.eq(pm.environment.get(\"name\") + \" Updated\");",
+							"    pm.expect(json.job).to.eq(pm.environment.get(\"job\") + \" Updated\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}} Updated\",\n    \"job\": \"{{job}} Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/{{id}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
