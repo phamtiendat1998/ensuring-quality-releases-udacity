@@ -194,7 +194,7 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: '$(azureServiceConnectionId)'
-              appName: 'fake-api-app'              
+              appName: 'Mydatpt-App-AppService'              
               appType: webApp
               package: '$(Pipeline.Workspace)/fake-rest-api/$(Build.BuildId)-fake-rest-api.zip'
           #--------------------------------------------#    
