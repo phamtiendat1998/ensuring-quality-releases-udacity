@@ -284,8 +284,8 @@ stages:
                 rm -rf chromedriver_linux64.zip
                 FILE=/home/azuredevops/app/chromedriver_linux64.zip
                 if [ ! -f "$FILE" ]; then
-                    wget http://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
-                    unzip -o chromedriver_linux64.zip
+                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
                     sudo rm -rf /usr/bin/chromedriver
                     sudo mv chromedriver /usr/bin/chromedriver
                     sudo chown root:root /usr/bin/chromedriver
