@@ -28,13 +28,13 @@ stages:
     #--------------------------------------------#  
     # Use Terraform to create the Infrastructure      
     # Install Terraform on the pipeline agent 
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    - task: TerraformInstaller@0
       displayName: 'Terrafom installation'
       inputs:
         terraformVersion: '1.2.9'
     
     # Run Terraform Init on the pipeline agent 
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    - task: TerraformCLI@0
       displayName: 'Terrafom init'
       inputs:
         provider: 'azurerm'
@@ -46,7 +46,7 @@ stages:
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    - task: TerraformCLI@0
       displayName: Terraform validate
       inputs:
         provider: 'azurerm'
@@ -70,7 +70,7 @@ stages:
 
     
     # Run Terraform Apply
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    - task: TerraformCLI@0
       displayName: Terraform apply
       inputs:
         provider: 'azurerm'
@@ -81,7 +81,7 @@ stages:
 
     # ToDo: Change the workingDirectory path, as applicable to you
     # Destroy the resources in Azure by running a separate pipeline. 
-    # - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+    # - task: TerraformCLI@0
     #   displayName: Terraform destroy
     #   inputs:
     #     provider: 'azurerm'
