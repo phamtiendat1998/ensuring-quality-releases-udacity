@@ -270,7 +270,7 @@ stages:
                 sudo apt-get install -y chromium-chromedriver
                 pip3 install requests
                 pip3 install selenium
-                pip3 install chardet
+                pip3 install urllib3==1.26.7 chardet==4.0.0
                 cd ~/
                 DIR=/home/azuredevops/app
                 rm -rf /home/azuredevops/app
@@ -281,11 +281,12 @@ stages:
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
                 rm -rf /home/azuredevops/app/chromedriver_linux64.zip
+                rm -rf chromedriver_linux64.zip
                 FILE=/home/azuredevops/app/chromedriver_linux64.zip
                 if [ ! -f "$FILE" ]; then
                     wget http://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
                     unzip -o chromedriver_linux64.zip
-                    sudo rm -f /usr/bin/chromedriver
+                    sudo rm -rf /usr/bin/chromedriver
                     sudo mv chromedriver /usr/bin/chromedriver
                     sudo chown root:root /usr/bin/chromedriver
                     sudo chmod +x /usr/bin/chromedriverq
