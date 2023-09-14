@@ -282,8 +282,7 @@ stages:
                 unzip -o $(Build.BuildId)-uitests.zip
                 FILE=/home/azuredevops/app/chromedriver_linux64.zip
                 if [ ! -f "$FILE" ]; then
-                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/117.0.5938.62)
-                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+                    wget http://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
                     unzip -o chromedriver_linux64.zip
                     sudo mv chromedriver /usr/bin/chromedriver
                     sudo chown root:root /usr/bin/chromedriver
