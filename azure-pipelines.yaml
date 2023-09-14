@@ -269,7 +269,7 @@ stages:
                 sudo apt-get install -y chromium-browser
                 sudo apt-get install -y chromium-chromedriver
                 pip3 install selenium
-                pip3 install chardet
+                pip3 install chardet==5.2.0
                 cd ~/
                 DIR=/home/azuredevops/app
                 if [ ! -d "$DIR" ]; then
