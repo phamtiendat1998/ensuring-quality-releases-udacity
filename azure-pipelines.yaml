@@ -280,6 +280,7 @@ stages:
                 mv $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip app
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
+                rm -rf /home/azuredevops/app/chromedriver_linux64.zip
                 FILE=/home/azuredevops/app/chromedriver_linux64.zip
                 if [ ! -f "$FILE" ]; then
                     wget http://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
