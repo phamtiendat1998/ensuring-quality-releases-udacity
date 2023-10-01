@@ -284,7 +284,7 @@ stages:
                     unzip -o chromedriver_linux64.zip
                     sudo mv chromedriver /usr/bin/chromedriver
                     sudo chown root:root /usr/bin/chromedriver
-                    sudo chmod +x /usr/bin/chromedriverq
+                    sudo chmod +x /usr/bin/chromedriver
                 fi
                 export PATH=$PATH:/usr/bin/chromedriver
 
