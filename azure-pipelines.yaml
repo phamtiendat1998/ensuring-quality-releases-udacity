@@ -277,15 +277,22 @@ stages:
                 mv $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip app
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
-                FILE=/home/azuredevops/app/chromedriver_linux64.zip
-                if [ ! -f "$FILE" ]; then
-                    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-                    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+                
+                DESIRED_CHROME_VERSION="117.0.5938.92"
+                
+                EXISTING_CHROMEDRIVER_VERSION=$(chromedriver --version)
+                
+                if [[ "$EXISTING_CHROMEDRIVER_VERSION" != *"$DESIRED_CHROME_VERSION"* ]]; then
+                    CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$DESIRED_CHROME_VERSION"
+                    CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
+                    CHROMEDRIVER_DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+                    wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chromedriver_linux64.zip
                     unzip -o chromedriver_linux64.zip
                     sudo mv chromedriver /usr/bin/chromedriver
                     sudo chown root:root /usr/bin/chromedriver
                     sudo chmod +x /usr/bin/chromedriver
                 fi
+                
                 export PATH=$PATH:/usr/bin/chromedriver
 
                 echo "Starting Selenium Tests"
