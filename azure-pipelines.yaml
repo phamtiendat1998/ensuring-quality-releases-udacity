@@ -278,6 +278,10 @@ stages:
                 cd app
                 unzip -o $(Build.BuildId)-uitests.zip
                 
+                if [ -f "chromedriver_linux64.zip" ]; then
+                  rm chromedriver_linux64.zip
+                fi
+
                 DESIRED_CHROME_VERSION="117.0.5938.92"
                 
                 EXISTING_CHROMEDRIVER_VERSION=$(chromedriver --version)
