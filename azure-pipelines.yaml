@@ -284,18 +284,16 @@ stages:
 
                 DESIRED_CHROME_VERSION="117.0.5938.92"
                 
-                EXISTING_CHROMEDRIVER_VERSION=$(chromedriver --version)
-                
-                if [[ "$EXISTING_CHROMEDRIVER_VERSION" != *"$DESIRED_CHROME_VERSION"* ]]; then
-                    CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$DESIRED_CHROME_VERSION"
-                    CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
-                    CHROMEDRIVER_DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-                    wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chromedriver_linux64.zip
-                    unzip -o chromedriver_linux64.zip
-                    sudo mv chromedriver /usr/bin/chromedriver
-                    sudo chown root:root /usr/bin/chromedriver
-                    sudo chmod +x /usr/bin/chromedriver
-                fi
+                INSTALLED_CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
+      
+                CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$INSTALLED_CHROME_VERSION"
+                CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
+                CHROMEDRIVER_DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+                wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chromedriver_linux64.zip
+                unzip -o chromedriver_linux64.zip
+                sudo mv chromedriver /usr/bin/chromedriver
+                sudo chown root:root /usr/bin/chromedriver
+                sudo chmod +x /usr/bin/chromedriver
                 
                 export PATH=$PATH:/usr/bin/chromedriver
 
