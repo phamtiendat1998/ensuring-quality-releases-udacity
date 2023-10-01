@@ -77,7 +77,7 @@ stages:
         command:  'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
-        extraArgs: '-var-file=terraform.tfvars'
+        extraArgs: '-var-file=terraform.tfvars -lock=false'
 
     # ToDo: Change the workingDirectory path, as applicable to you
     # Destroy the resources in Azure by running a separate pipeline. 
