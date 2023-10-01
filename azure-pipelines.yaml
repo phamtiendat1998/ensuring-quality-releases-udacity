@@ -285,7 +285,7 @@ stages:
                 INSTALLED_CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
       
                 CHROMEDRIVER_DOWNLOAD_URL="	https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip"
-                wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chrome.zip
+                wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chrome-linux64.zip
                 unzip -o chrome-linux64.zip
                 sudo mv chromedriver /usr/bin/chromedriver
                 sudo chown root:root /usr/bin/chromedriver
