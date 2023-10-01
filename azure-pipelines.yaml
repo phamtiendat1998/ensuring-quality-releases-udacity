@@ -282,13 +282,9 @@ stages:
                   rm chromedriver_linux64.zip
                 fi
 
-                DESIRED_CHROME_VERSION="117.0.5938.92"
-                
                 INSTALLED_CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
       
-                CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$INSTALLED_CHROME_VERSION"
-                CHROMEDRIVER_VERSION=$(curl -s "$CHROMEDRIVER_URL")
-                CHROMEDRIVER_DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+                CHROMEDRIVER_DOWNLOAD_URL="	https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/linux64/chrome-linux64.zip"
                 wget "$CHROMEDRIVER_DOWNLOAD_URL" -O chromedriver_linux64.zip
                 unzip -o chromedriver_linux64.zip
                 sudo mv chromedriver /usr/bin/chromedriver
