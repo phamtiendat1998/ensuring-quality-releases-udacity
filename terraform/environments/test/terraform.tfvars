@@ -2,7 +2,7 @@
 subscription_id = "0c7436df-9359-4a04-b572-96ab6d89334c"
 client_id       = "f5f68698-90b1-4b16-a9e0-263002e29a9f"
 client_secret   = "HCk8Q~~GEc7H8_n7Hal1uWence3T3lS3mAj2IaNE"
-tenant_id       = "f958e84a-92b8-439f-a62d-4f45996b6d07
+tenant_id       = "f958e84a-92b8-439f-a62d-4f45996b6d07"
 
 # Resource Group/Location
 location            = "East US"
